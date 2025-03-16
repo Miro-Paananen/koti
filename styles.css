@@ -84,10 +84,40 @@ header {
 @media (max-width: 768px) {
     header {
         padding: 0.7rem 1.5rem; /* More compact header for mobile */
+        z-index: 1010; /* Ensure header stays above other content */
     }
     
+    main {
+        /* Add extra padding to ensure content starts below the header */
+        padding-top: 70px; /* Increased from previous value */
+    }
+    
+    /* Adjust top section to prevent content overlap */
     .hero {
-        padding-top: 5rem; /* Increased top padding to prevent content overlap */
+        padding-top: 80px; /* Increased padding to create more space */
+        margin-top: 0; /* Remove any negative margin that could cause overlap */
+    }
+    
+    /* Ensure content in about and other pages also doesn't overlap */
+    .about-content, 
+    .contact-content,
+    .projects-container {
+        padding-top: 80px; /* Add extra padding for all main content sections */
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem 1rem; /* Compact header for smaller phones */
+    }
+    
+    main {
+        padding-top: 60px; /* Slightly smaller value for very small screens */
+    }
+    
+    /* Add extra space after the header for the smallest screens */
+    .hero {
+        padding-top: 70px;
     }
 }
 
@@ -3790,5 +3820,54 @@ main {
 @media (max-width: 768px) {
     .mobile-beta-text {
         display: block;
+    }
+}
+
+/* Fix for horizontal scrolling issues on mobile */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Ensure skills section content doesn't overflow on mobile */
+.skills-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.skills-section {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.skill-item {
+    max-width: 100%;
+    overflow-hidden;
+}
+
+/* Fix potential overflow from grid elements */
+.about-grid, 
+.skills-list,
+.personal-info {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+    
+    .about-content,
+    .skills-section,
+    .quote-section {
+        max-width: 100%;
+        overflow-x: hidden;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }

@@ -8,9 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="theme-color" content="#0f0c29">
     <script src="http://localhost:35729/livereload.js"></script>
+    <style>
+        /* Fix for horizontal scrolling on tietoa page */
+        .about-content, 
+        .skills-section, 
+        .quote-section {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        /* Make sure long text in skills section doesn't overflow */
+        .skill-item span {
+            white-space: normal;
+            word-break: break-word;
+        }
+        
+        /* Fix for animations potentially causing overflow */
+        .scroll-reveal {
+            max-width: 100%;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-    <header style="background-color: transparent;">
+    <header style="background-color: transparent; z-index: 1010;">
         <nav style="max-width: none; margin: 0; padding-left: 2rem; padding-right: 2rem;">
             <div class="logo">
                 <a href="index.html" class="logo-link">
@@ -34,7 +55,7 @@
         </nav>
     </header>
 
-    <main>
+    <main style="padding-top: 60px;">
         <!-- Hero section -->
         <section class="about-hero">
             <!-- Geometric elements -->
