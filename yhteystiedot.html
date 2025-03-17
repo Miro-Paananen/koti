@@ -265,14 +265,15 @@
 <body>
     <header style="background-color: transparent; z-index: 1010;">
         <nav style="max-width: none; margin: 0; padding-left: 2rem; padding-right: 2rem;">
-            <div class="logo">
-                <a href="index.html" class="logo-link">
-                    <img src="images/logo.svg" alt="Miro Paananen Logo" class="logo-svg">
+            <!-- Remove the logo image -->
+            <!-- <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Logo">
                     <span class="logo-text">Miro Paananen</span>
                 </a>
-            </div>
-            <!-- Add the Mobile Beta text here -->
-            <div class="mobile-beta-text">Mobiili Beta</div>
+            </div> -->
+            <!-- Center the "Mobiili Beta" text -->
+            <div class="mobile-beta-text" style="left: 50%; transform: translateX(-50%);">Mobiili Beta</div>
             <ul>
                 <li><a href="index.html"><i class="fas fa-home"></i> Etusivu</a></li>
                 <li><a href="projektit.html"><i class="fas fa-code"></i> Projektit</a></li>
@@ -500,6 +501,48 @@
                 observer.observe(element);
             });
         });
+
+        // Parannettu header-toiminnallisuus mobiilissa
+        let lastScrollTop = 0;
+        let headerTimeoutId;
+        
+        function handleHeaderVisibility() {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Näytä header aina, kun scrollataan ylös
+            if (currentScroll < lastScrollTop) {
+                header.classList.remove('header-hidden');
+                
+                // Lisätään scrolled-luokka, jos ollaan scrollattu yli 50px
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            } 
+            // Piilota header, kun scrollataan alas ja ollaan yli 150px alhaalla
+            else if (currentScroll > lastScrollTop && currentScroll > 150) {
+                header.classList.add('header-hidden');
+                
+                // Varmistetaan, että scrolled-luokka on päällä
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                }
+            }
+            
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
+        
+        // Käytetään vain mobiilissa
+        if (window.innerWidth <= 768) {
+            window.addEventListener('scroll', function() {
+                clearTimeout(headerTimeoutId);
+                
+                // Rajoitetaan suorituskertoja suorituskyvyn parantamiseksi
+                headerTimeoutId = setTimeout(handleHeaderVisibility, 10);
+            }, { passive: true });
+        }
     </script>
 </body>
 </html>

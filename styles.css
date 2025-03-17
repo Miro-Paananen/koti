@@ -1820,7 +1820,7 @@ footer::before {
 
 .skill-item span::after {
     content: attr(data-percent);
-    color: var(--accent-color);
+    color: var (--accent-color);
 }
 
 .skill-bar {
@@ -3943,4 +3943,124 @@ html, body {
 /* Apply proper stacking for fixed elements */
 header, .hero-content, .benefit-card, .skill-card {
     will-change: transform;
+}
+
+/* Parannettu mobiiliheader */
+@media (max-width: 768px) {
+    /* Header-animaatio scrollatessa */
+    header {
+        transition: transform 0.4s ease, background-color 0.3s ease;
+        padding: 0.6rem 1rem;
+        background-color: rgba(15, 12, 41, 0.95);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Header pienenee ja saa taustavärin scrollatessa */
+    header.scrolled {
+        padding: 0.4rem 1rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Lisätään mahdollisuus piilottaa header alaspäin scrollatessa */
+    header.header-hidden {
+        transform: translateY(-100%);
+    }
+    
+    /* Mobile Beta -teksti paremmaksi */
+    .mobile-beta-text {
+        position: absolute;
+        right: 4.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--gradient);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 600;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border: none;
+        line-height: 1;
+    }
+    
+    /* Logon teksti piiloon pienimmillä näytöillä, säästää tilaa */
+    @media (max-width: 380px) {
+        .logo-text {
+            display: none;
+        }
+        
+        .mobile-beta-text {
+            right: 3.5rem;
+        }
+    }
+    
+    /* Koko hamburger-menu -alue on klikattava */
+    .hamburger {
+        padding: 12px;
+        margin-right: -12px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    /* Hamburger-viivat selkeämmiksi */
+    .hamburger span {
+        width: 28px;
+        height: 2.5px;
+        margin: 2px 0;
+        border-radius: 2px;
+    }
+    
+    /* Avattu mobiilivalikko on isompi ja selkeämpi */
+    nav ul.show {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+    
+    nav ul.show li a {
+        padding: 1rem 0;
+        font-size: 1.2rem;
+    }
+    
+    /* Ensimmäinen elementti vähän kauemmas headerista */
+    main {
+        padding-top: 80px;
+    }
+    
+    @media (max-width: 380px) {
+        main {
+            padding-top: 70px;
+        }
+    }
+    
+    /* Skill cardit selkeämmin kosketusalueilla */
+    .skill-card, .benefit-card {
+        padding: 1.8rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Korjaa päällekkäiset elementit */
+    .hero-content {
+        margin-top: 1rem;
+    }
+}
+
+/* Parannuksia kosketusnäytön kokemukseen */
+@media (hover: none) {
+    /* Kosketusnäytöllä isommat tarvittavat välit */
+    nav ul.show li a {
+        padding: 1.2rem 0;
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        padding: 1.3rem 2.5rem;
+    }
+    
+    .skill-card, .benefit-card {
+        margin-bottom: 1.2rem;
+    }
 }
